@@ -81,6 +81,13 @@ h2 {
    min-height: 60px;
 }
 
+#nextQ {
+	width: 40%;
+	margin: auto;
+	margin-top: 15px;
+	min-width: 110px;
+}
+
 
 .hidden {
   display: none;
