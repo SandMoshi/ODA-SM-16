@@ -1,3 +1,7 @@
+ function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
 //Sizing -- This will make the content height be the perfect size to fill between the header and footer
 $(function(){
 var headerh;
