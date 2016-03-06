@@ -46,7 +46,13 @@ $(".facebox").click(function(){
 // This is the scirpt that will get the facts and display them //
 //                                                             //
 //-------------------------------------------------------------//
-$(function(){
+if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    } else {
+        onDeviceReady();
+    }
+
+function onDeviceReady() {
 	var Quotes = [];
 	var ID = [];
 	var Tag = [];
@@ -95,7 +101,7 @@ $(function(){
 						var RandomNum = Math.floor(Math.random()*(max-min+1)+min);
 						Quote = Quotes[RandomNum];
 						var ImageNum = Math.floor(Math.random()*(5-1+1)+1);
-						CurrentImage = "url(/images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
+						CurrentImage = "url(./images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
 						if (seen[RandomNum] == true ) {
 							ChooseQuote(0,totalQ);
 								}
@@ -106,7 +112,7 @@ $(function(){
 						}
 	//==================
 	});
-});
+}
 
 
 
