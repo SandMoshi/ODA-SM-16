@@ -36,7 +36,7 @@ var h4s = h4 + "px";
 
 $("#quotebox").css("margin-top",h4s);
 	
-});
+};
 
 //Make the quotebox flip over on click
 $(".facebox").click(function(){
