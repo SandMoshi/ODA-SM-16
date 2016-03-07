@@ -56,66 +56,86 @@ if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
         onDeviceReady();
     }
 
-function onDeviceReady() {
-	var Quotes = [];
-	var ID = [];
-	var Tag = [];
-	var seen = [];
-   //Get quotes from JSON file
-	  $.ajax({
-								url: 'json/facts.json',
-				    dataType: 'json',
-				    type: 'get',
-				    success: function(data){
-									 console.log(data);
-										console.log("successfully imported the JSON file");
-									 console.log(data.length); //Returns 64
-									 totalQ = data.length; 
-									 for (i = 0; i < totalQ; i++){
-											   ID[i] = data[i][0];
-											   Tag[i] = data[i][1];
-											   Quotes[i] = data[i][2];
-											   seen[i] = data[i][3];
-						  		}
-									console.log(Quotes.length);
-						}
-			})
-			.done(function(data){ //This waits for AJAX to be done before running
-//					$("#nextQ").click(function(){ 
-	   
-					var Quote = new String;
-					var qnumber = 0;
-					var totalQ //The total number of available quotes to choose from
-					var Qrem //Remaining unseen quotes
-					var lock = new Boolean; //This will be true if the quote is already seen
-					var CurrentImage = String;
 
-					totalQ = Quotes.length;
-					console.log("TotalQ = " + totalQ);
-					ChooseQuote(0,totalQ);
+function onDeviceReady() { //Do something when the app on device is loaded
+/* Checks if localstorage is available. returns null if local storage is not defined */
+var localVal = localStorage.getItem('DateOpened'); 
 
-					//Change the image depending on the quote
+if(localVal  == null){  
+    // If the localstorage doesn't exist, nothing happens
+	   console.log("LocalStorage did not work...")}
+	else{
+    var tempd = new Date(); //Get today's date
+    var str = tempd.getDay() + tempd.getMonth() + tempd.getFullYear(); //Get Day Month Year
+    if(localVal.localeCompare(str) == -1) //If stored date is older than this date do something:
+				  { 
+        //Run the JS for the app (give new quote since it is a new day)
+	
+								var Quotes = [];
+								var ID = [];
+								var Tag = [];
+								var seen = [];
+										//Get quotes from JSON file
+										$.ajax({
+															url: 'json/facts.json',
+															dataType: 'json',
+															type: 'get',
+															success: function(data){
+																	console.log(data);
+																	console.log("successfully imported the JSON file");
+																	console.log(data.length); //Returns 64
+																	totalQ = data.length; 
+																	for (i = 0; i < totalQ; i++){
+																					ID[i] = data[i][0];
+																					Tag[i] = data[i][1];
+																					Quotes[i] = data[i][2];
+																					seen[i] = data[i][3];
+																	}
+																console.log(Quotes.length);
+													}
+										})
+										.done(function(data){ //This waits for AJAX to be done before running
+										//					$("#nextQ").click(function(){ 
 
-					//replace the quote with a new one
-					$("#qotd").html(Quote);
-					$(".facebox").css("background-image",CurrentImage);
-     console.log("Image Changed");
-					//================
-				function ChooseQuote(min,max){
-						var RandomNum = Math.floor(Math.random()*(max-min+1)+min);
-						Quote = Quotes[RandomNum];
-						var ImageNum = Math.floor(Math.random()*(5-1+1)+1);
-						CurrentImage = "url(images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
-						if (seen[RandomNum] == true ) {
-							ChooseQuote(0,totalQ);
-								}
-						seen[RandomNum] = true;
-						console.log(Quote);
-						console.log(CurrentImage);
+												var Quote = new String;
+												var qnumber = 0;
+												var totalQ //The total number of available quotes to choose from
+												var Qrem //Remaining unseen quotes
+												var lock = new Boolean; //This will be true if the quote is already seen
+												var CurrentImage = String;
 
-						}
-	//==================
-	});
+												totalQ = Quotes.length;
+												console.log("TotalQ = " + totalQ);
+												ChooseQuote(0,totalQ);
+
+												//Change the image depending on the quote
+
+												//replace the quote with a new one
+												$("#qotd").html(Quote);
+												$(".facebox").css("background-image",CurrentImage);
+												console.log("Image Changed");
+												//================
+											function ChooseQuote(min,max){
+													var RandomNum = Math.floor(Math.random()*(max-min+1)+min);
+													Quote = Quotes[RandomNum];
+													var ImageNum = Math.floor(Math.random()*(5-1+1)+1);
+													CurrentImage = "url(images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
+													if (seen[RandomNum] == true ) {
+														ChooseQuote(0,totalQ);
+															}
+													seen[RandomNum] = true;
+													console.log(Quote);
+													console.log(CurrentImage);
+
+													}
+									//==================
+								});
+								//Save the current date in local storage
+        localStorage.setItem('someUniqueName',str);
+							 console.log("The App Ran, you can get a new fat tomorrow");
+								console.log("Todays date:" + str);
+    }
+		}
 }
 
 
