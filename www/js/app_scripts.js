@@ -131,7 +131,7 @@ if(localVal  == null){
 									//==================
 								});
 								//Save the current date in local storage
-        localStorage.setItem('someUniqueName',str);
+        localStorage.setItem('DateOpened',str);
 							 console.log("The App Ran, you can get a new fat tomorrow");
 								console.log("Todays date:" + str);
     }
