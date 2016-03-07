@@ -149,8 +149,8 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
 		}
 	 else {
 			//If it is still the same day, show the last fact & image
-			 var Quote = localStorage.get('Curr_Fact');
-			 var CurrentImage = localStorage.get('Curr_ImgUrl');
+			 var Quote = localStorage.getItem('Curr_Fact');
+			 var CurrentImage = localStorage.getItem('Curr_ImgUrl');
 						$("#qotd").html(Quote);
 						$(".facebox").css("background-image",CurrentImage);
 						console.log("Showing the same fact as before. Wait until tomorrow to get a new fact.");
