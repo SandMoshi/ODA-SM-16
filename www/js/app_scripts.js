@@ -4,8 +4,8 @@
 
 //Sizing -- This will make the content height be the perfect size to fill between the header and footer
 
-function onDeviceReady() {
 //$(function(){
+$( document ).ready(function() {
 var headerh;
 var footerh;
 var pageh;
@@ -36,7 +36,7 @@ var h4s = h4 + "px";
 
 $("#quotebox").css("margin-top",h4s);
 	
-};
+});
 
 //Make the quotebox flip over on click
 $(".facebox").click(function(){
