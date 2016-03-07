@@ -38,9 +38,10 @@ $("#quotebox").css("margin-top",h4s);
 
 //Make the quotebox flip over on click
 $(".facebox").click(function(){
-   $(this).fadeOut("slow", function(){
+	$("#quotebox").removeClass("PulseEffect");
+   $(".facebox").fadeOut("slow", function(){
 				  $("#qotd").fadeIn("slow", function(){
-						})
+						});
 			});
 });
 
@@ -58,17 +59,24 @@ if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
 
 
 function onDeviceReady() { //Do something when the app on device is loaded
-/* Checks if localstorage is available. returns null if local storage is not defined */
-var localVal = localStorage.getItem('DateOpened'); 
-
-if(localVal  == null){  
+	
+		var tempd = new Date(); //Get today's date
+		//Checks if localstorage had 'DateOpened' already stored
+	
+	 // Note that by adding strings in there, we end up with a string instead of adding.
+		// Note the order: Year first, then month, then day.
+		// Also, since we display it, we put separators in and add 1 to month (since Jan = 0).
+		var str = tempd.getFullYear() + "-" + (tempd.getMonth() + 1) + "-" + tempd.getDay() + "-" + tempd.getMinutes();
+	    console.log("Today's date: " + str);
+	
+		var localVal = localStorage.getItem('DateOpened'); 
+     console.log("Previous localVal: " + localVal);
+	
+//If stored date is older than this date do something:	
+if(localVal  == null || localVal.localeCompare(str) < 0){  
     // If the localstorage doesn't exist, nothing happens
-	   console.log("LocalStorage did not work...")}
-	else{
-    var tempd = new Date(); //Get today's date
-    var str = tempd.getDay() + tempd.getMonth() + tempd.getFullYear(); //Get Day Month Year
-    if(localVal.localeCompare(str) == -1) //If stored date is older than this date do something:
-				  { 
+	   console.log("App will now run once for today.")
+
         //Run the JS for the app (give new quote since it is a new day)
 	
 								var Quotes = [];
@@ -132,11 +140,9 @@ if(localVal  == null){
 								});
 								//Save the current date in local storage
         localStorage.setItem('DateOpened',str);
-							 console.log("The App Ran, you can get a new fat tomorrow");
-								console.log("Todays date:" + str);
-    }
+							 console.log("The App Ran, you can get a new fact tomorrow");
+								console.log("Current LocalStorage Date: " + str);
 		}
 }
-
 
 
