@@ -3,7 +3,9 @@
     }
 
 //Sizing -- This will make the content height be the perfect size to fill between the header and footer
-$(function(){
+
+function onDeviceReady() {
+//$(function(){
 var headerh;
 var footerh;
 var pageh;

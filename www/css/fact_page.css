@@ -97,7 +97,7 @@ h2 {
 }
 
 .facebox {
-  background-image: url(./images/header-mobile.jpg);
+  background-image: url(../images/header-mobile.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
