@@ -134,6 +134,10 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
 													seen[RandomNum] = true;
 													console.log(Quote);
 													console.log(CurrentImage);
+												
+												 //Remeber which fact is displayed
+												 localStorage.setItem('Curr_Fact', Quote);
+												 localStorage.setItem('Curr_ImgUrl', CurrentImage);
 
 													}
 									//==================
@@ -142,6 +146,14 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
         localStorage.setItem('DateOpened',str);
 							 console.log("The App Ran, you can get a new fact tomorrow");
 								console.log("Current LocalStorage Date: " + str);
+		}
+	 else {
+			//If it is still the same day, show the last fact & image
+			 var Quote = localStorage.get('Curr_Fact');
+			 var CurrentImage = localStorage.get('Curr_ImgUrl');
+						$("#qotd").html(Quote);
+						$(".facebox").css("background-image",CurrentImage);
+						console.log("Showing the same fact as before. Wait until tomorrow to get a new fact.");
 		}
 }
 
