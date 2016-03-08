@@ -1,6 +1,9 @@
+/*
  function onLoad() {
         document.addEventListener("deviceready", onDeviceReady, false);
     }
+*/
+
 
 //Sizing -- This will make the content height be the perfect size to fill between the header and footer
 
@@ -56,12 +59,13 @@ $(".facebox").click(function(){
 // This is the scirpt that will get the facts and display them //
 //                                                             //
 //-------------------------------------------------------------//
-if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+/*if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
         document.addEventListener("deviceready", onDeviceReady, false);
     } else {
         onDeviceReady();
-    }
+    }*/
 
+document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() { //Do something when the app on device is loaded
 	

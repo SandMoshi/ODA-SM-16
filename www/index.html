@@ -14,8 +14,24 @@
   <script src="./js/jquery-1.11.3.min.js"></script>
   <!-- Include the jQuery Mobile library -->
   <script src="./js/jquery.mobile-1.4.5.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+  <script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Now safe to use device APIs
+    }
+
+    </script>
 </head>
-<body>
+<body onload="onLoad()">
 
 <div data-role="page" id="pageone">
   <div data-role="header">
@@ -36,21 +52,5 @@
   </div>
 </div> 
   <script type="text/javascript" src="js/app_scripts.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" charset="utf-8">
-
-    // Wait for device API libraries to load
-    //
-    function onLoad() {
-        document.addEventListener("deviceready", onDeviceReady, false);
-    }
-
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        // Now safe to use device APIs
-    }
-
-    </script>
 </body>
 </html>
