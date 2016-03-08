@@ -1,6 +1,6 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.ODA-SM-16" version="1.0.0">
   <name>One Direction Facts</name>
-  <description>Become a One Direction super fan after learning new and rare facts about this band!</description>
+  <description>Become a One Direction super fan these facts!</description>
   <author href="" email="badrush14@hotmail.com">MoshiCorp</author>
   <content src="index.html"/>
   <preference name="permissions" value="none"/>
