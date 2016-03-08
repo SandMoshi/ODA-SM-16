@@ -102,7 +102,6 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
 																					ID[i] = data[i][0];
 																					Tag[i] = data[i][1];
 																					Quotes[i] = data[i][2];
-																					seen[i] = data[i][3];
 																	}
 																console.log(Quotes.length);
 													}
@@ -115,9 +114,19 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
 												var Qrem //Remaining unseen quotes
 												var lock = new Boolean; //This will be true if the quote is already seen
 												var CurrentImage = String;
-
+											
 												totalQ = Quotes.length;
 												console.log("TotalQ = " + totalQ);
+											
+												//Get list of which facts have already been seen
+												var seen = localStorage.getItem('seen');
+											 console.log("var seen = " + seen);
+													if (seen == null){
+															var seen = new Array(totalQ);
+														 console.log("var seen = " + seen);
+													}
+											
+											 //Get a Quote
 												ChooseQuote(0,totalQ);
 
 												//Change the image depending on the quote
@@ -136,15 +145,30 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
 													CurrentImage = "url(../images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
 													if (seen[RandomNum] == true ) {
 														ChooseQuote(0,totalQ);
+														console.log("seen[RandomNum] = " + seen[RandomNum] );
+														var numOfTrue = 0;
+																		for(var i=0; i<totalQ; i++){
+																						if(seen[i] === "true")
+																									numOfTrue++;
+																		}
+														    if (numOfTrue = totalQ) {
+																			 localStorage.setItem('All_Facts_Seen:', true);
+																			 console.log("All the Facts have been seen. Resetting Facts.");
+																			 seen = new Array(totalQ); //Empty the seen Array
+																			 localStorage.setItem('seen', seen); //Save the empty Array
+																		}
 															}
-													seen[RandomNum] = true;
+												 else { 
+														seen[RandomNum] = true;
+														console.log("This fact has never been seen.")
+													}
 													console.log(Quote);
 													console.log(CurrentImage);
 												
 												 //Remeber which fact is displayed
 												 localStorage.setItem('Curr_Fact', Quote);
 												 localStorage.setItem('Curr_ImgUrl', CurrentImage);
-
+												 localStorage.setItem('seen', seen);
 													}
 									//==================
 								});
