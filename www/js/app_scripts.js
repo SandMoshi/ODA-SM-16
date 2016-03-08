@@ -9,13 +9,13 @@ $( document ).ready(function() {
 var headerh;
 var footerh;
 var pageh;
-var pageh2;
+var hbtn_nextq;
 
 headerh = $("div[data-role='header']").height();
 footerh = $("div[data-role='footer']").height();
 pageh = $(window).height();
 	
-console.log(headerh + " " + footerh + " " + pageh + " " + pageh2 );
+console.log(headerh + " " + footerh + " " + pageh);
 	
 var difference = pageh - headerh - footerh - 35;
 	
@@ -26,13 +26,16 @@ var h1, h2, h3, h4;
 h1 = $(".ui-content").height();
 h2 = $(".ui-content>h2").height();
 h3 = $("#quotebox").height();
+hbtn_nextq = $("#nextQ").height();
 
-h4 = (h1 - h2 - h3)/2;
-	 console.log(h1);
+h4 = (h1 - h2 - h3 - hbtn_nextq - 80) /2;
+	console.log(h1);
  console.log(h2);
  console.log(h3);
+	console.log(hbtn_nextq);
  console.log(h4);
-var h4s = h4 + "px";
+	
+ var h4s = h4 + "px";
 
 $("#quotebox").css("margin-top",h4s);
 	
@@ -68,7 +71,7 @@ function onDeviceReady() { //Do something when the app on device is loaded
 	 // Note that by adding strings in there, we end up with a string instead of adding.
 		// Note the order: Year first, then month, then day.
 		// Also, since we display it, we put separators in and add 1 to month (since Jan = 0).
-		var str = tempd.getFullYear() + "-" + (tempd.getMonth() + 1) + "-" + tempd.getDay() + "-" + tempd.getMinutes();
+		var str = tempd.getFullYear() + "-" + (tempd.getMonth() + 1) + "-" + tempd.getDate();
 	    console.log("Today's date: " + str);
 	
 		var localVal = localStorage.getItem('DateOpened'); 
@@ -105,7 +108,6 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
 													}
 										})
 										.done(function(data){ //This waits for AJAX to be done before running
-										//					$("#nextQ").click(function(){ 
 
 												var Quote = new String;
 												var qnumber = 0;
@@ -121,15 +123,17 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
 												//Change the image depending on the quote
 
 												//replace the quote with a new one
+								$("#nextQ").click(function(){ 
 												$("#qotd").html(Quote);
 												$(".facebox").css("background-image",CurrentImage);
 												console.log("Image Changed");
+								});
 												//================
 											function ChooseQuote(min,max){
 													var RandomNum = Math.floor(Math.random()*(max-min+1)+min);
 													Quote = Quotes[RandomNum];
 													var ImageNum = Math.floor(Math.random()*(5-1+1)+1);
-													CurrentImage = "url(images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
+													CurrentImage = "url(../images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
 													if (seen[RandomNum] == true ) {
 														ChooseQuote(0,totalQ);
 															}
@@ -151,11 +155,13 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
 		}
 	 else {
 			//If it is still the same day, show the last fact & image
+			$("#nextQ").click(function(){ 
 			 var Quote = localStorage.getItem('Curr_Fact');
 			 var CurrentImage = localStorage.getItem('Curr_ImgUrl');
-						$("#qotd").html(Quote);
 						$(".facebox").css("background-image",CurrentImage);
+						$("#qotd").html(Quote);
 						console.log("Showing the same fact as before. Wait until tomorrow to get a new fact.");
+			});
 		}
 }
 
