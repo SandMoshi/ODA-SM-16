@@ -69,6 +69,8 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() { //Do something when the app on device is loaded
 	
+	$("#nextQ").click(function(){ 
+	
 		var tempd = new Date(); //Get today's date
 		//Checks if localstorage had 'DateOpened' already stored
 	
@@ -80,11 +82,11 @@ function onDeviceReady() { //Do something when the app on device is loaded
 	
 		var localVal = localStorage.getItem('DateOpened'); 
      console.log("Previous localVal: " + localVal);
-	
-//If stored date is older than this date do something:	
-if(localVal  == null || localVal.localeCompare(str) < 0){  
-    // If the localstorage doesn't exist, nothing happens
-	   console.log("App will now run once for today.")
+
+		//If stored date is older than this date do something:	
+		if(localVal  == null || localVal.localeCompare(str) < 0){  
+						// If the localstorage doesn't exist, nothing happens
+						console.log("App will now run once for today.")
 
         //Run the JS for the app (give new quote since it is a new day)
 	
@@ -136,11 +138,11 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
 												//Change the image depending on the quote
 
 												//replace the quote with a new one
-								$("#nextQ").click(function(){ 
+
 												$("#qotd").html(Quote);
 												$(".facebox").css("background-image",CurrentImage);
 												console.log("Image Changed");
-								});
+											
 												//================
 											function ChooseQuote(min,max){
 													var RandomNum = Math.floor(Math.random()*(max-min+1)+min);
@@ -175,22 +177,22 @@ if(localVal  == null || localVal.localeCompare(str) < 0){
 												 localStorage.setItem('seen', seen);
 													}
 									//==================
-								});
 								//Save the current date in local storage
         localStorage.setItem('DateOpened',str);
 							 console.log("The App Ran, you can get a new fact tomorrow");
 								console.log("Current LocalStorage Date: " + str);
+								});
 		}
 	 else {
 			//If it is still the same day, show the last fact & image
-			$("#nextQ").click(function(){ 
 			 var Quote = localStorage.getItem('Curr_Fact');
 			 var CurrentImage = localStorage.getItem('Curr_ImgUrl');
 						$(".facebox").css("background-image",CurrentImage);
 						$("#qotd").html(Quote);
 						console.log("Showing the same fact as before. Wait until tomorrow to get a new fact.");
-			});
 		}
+	});
 }
+																			
 
 
