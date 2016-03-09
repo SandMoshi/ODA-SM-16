@@ -148,7 +148,7 @@ function onDeviceReady() { //Do something when the app on device is loaded
 													var RandomNum = Math.floor(Math.random()*(max-min+1)+min);
 													Quote = Quotes[RandomNum];
 													var ImageNum = Math.floor(Math.random()*(5-1+1)+1);
-													CurrentImage = "url(../images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
+													CurrentImage = "url(./images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
 													if (seen[RandomNum] == true ) {
 														ChooseQuote(0,totalQ);
 														console.log("seen[RandomNum] = " + seen[RandomNum] );
