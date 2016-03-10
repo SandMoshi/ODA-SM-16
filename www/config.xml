@@ -36,8 +36,8 @@
   <gap:plugin name="org.apache.cordova.network-information"/>
   <gap:plugin name="org.apache.cordova.splashscreen"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
-  <icon src="icon.png"/>
   
+  <icon src="icon.png"/>
   <platform name="ios">
     <icon src="icon.png" width="300" height="300" />
 		</platform>
@@ -59,7 +59,7 @@
 	<icon src="./images/android/mipmap-hdpi/ic_launcher.png" platform="android" qualifier="hdpi" />
 	<icon src="./images/android/mipmap-xhdpi/ic_launcher.png" platform="android" qualifier="xhdpi" />
 	<icon src="./images/android/mipmap-xxhdpi/ic_launcher.png" platform="android" qualifier="xxhdpi" />
-	<icon src="./images/android/mipmap-xxxhdpi/" platform="android" qualifier="fr-xxhdpi" />
+	<icon src="./images/android/mipmap-xxxhdpi/ic_launcher.png" platform="android" qualifier="fr-xxhdpi" />
 	
 	 <!-- iPhone 6 / 6+ -->
 <icon src="./images/ios/AppIcon.appiconset/Icon-60@3x.png" platform="ios" width="180" height="180" />
@@ -81,6 +81,4 @@
 <icon src="./images/ios/AppIcon.appiconset/Icon-40@2x.png" platform="ios" width="80" height="80" />
 	
 
-  
-  
 </widget>
