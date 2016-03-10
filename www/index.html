@@ -4,16 +4,20 @@
 		<meta charset="utf-8" />
 		<meta name="format-detection" content="telephone=no" />
 		<meta name="msapplication-tap-highlight" content="no" />
+		
   <!-- Include meta tag to ensure proper rendering and touch zooming -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		
   <!-- Include jQuery Mobile stylesheets -->
   <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
   <link rel="stylesheet" href="css/fact_page.css">
+  <title>One Direction Facts</title>
 </head>
-<body onload="onLoad()">
 
-<div data-role="page" id="pageone">
+
+<body>
+	<div data-role="page" id="pageone">
   <div data-role="header">
     <h1>One Direction - Fact of the Day</h1>
   </div>
@@ -30,10 +34,16 @@
   <div data-role="footer">
     <h1>New Features Coming Soon!</h1>
   </div>
-</div> 
+</div>
+ 
+ <!--  --------------------JS------------------------ -->
   <script src="./js/jquery-1.11.3.min.js"></script>
   <script src="./js/jquery.mobile-1.4.5.min.js"></script>
   <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
   <script type="text/javascript" src="js/app_scripts.js"></script>
+		<script type="text/javascript">
+            app.initialize();
+  </script>
+  <!--  ------------------------------------------- -->
 </body>
 </html>

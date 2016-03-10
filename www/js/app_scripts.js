@@ -1,72 +1,24 @@
-    // Wait for device API libraries to load
-    function onLoad() {
-        document.addEventListener("deviceready", onDeviceReady, false);
-    }
-
-    // device APIs are available
+var app = {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
     //
-    function onDeviceReady() {
-        // Now safe to use device APIs
-    }
-
-//Sizing -- This will make the content height be the perfect size to fill between the header and footer
-
-//$(function(){
-$(window).ready(function() {
-var headerh;
-var footerh;
-var pageh;
-var hbtn_nextq;
-
-headerh = $("div[data-role='header']").height();
-footerh = $("div[data-role='footer']").height();
-pageh = $(window).height();
-	
-console.log(headerh + " " + footerh + " " + pageh);
-	
-var difference = pageh - headerh - footerh - 35;
-	
-$(".ui-content").css("height", difference);
-	
-var h1, h2, h3, h4;
-	
-h1 = $(".ui-content").height();
-h2 = $(".ui-content>h2").height();
-h3 = $("#quotebox").height();
-hbtn_nextq = $("#nextQ").height();
-
-h4 = (h1 - h2 - h3 - hbtn_nextq - 80) /2;
-	console.log(h1);
- console.log(h2);
- console.log(h3);
-	console.log(hbtn_nextq);
- console.log(h4);
-	
- var h4s = h4 + "px";
-
-$("#quotebox").css("margin-top",h4s);
-	
-});
-
-//Make the quotebox flip over on click
-$(".facebox").click(function(){
-	$("#quotebox").removeClass("PulseEffect");
-   $(".facebox").fadeOut("slow", function(){
-				  $("#qotd").fadeIn("slow", function(){
-						});
-			});
-});
-
-
-//-------------------------------------------------------------//
-//                                                             //
-// This is the scirpt that will get the facts and display them //
-//                                                             //
-//-------------------------------------------------------------//
-
-function onDeviceReady() { //Do something when the app on device is loaded
-	
-	$("#nextQ").click(function(){ 
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: 	$("#nextQ").click(function(){ 
 	
 		var tempd = new Date(); //Get today's date
 		//Checks if localstorage had 'DateOpened' already stored
@@ -145,7 +97,7 @@ function onDeviceReady() { //Do something when the app on device is loaded
 													var RandomNum = Math.floor(Math.random()*(max-min+1)+min);
 													Quote = Quotes[RandomNum];
 													var ImageNum = Math.floor(Math.random()*(5-1+1)+1);
-													CurrentImage = "url(images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
+													CurrentImage = "url(./images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
 													if (seen[RandomNum] == true ) {
 														ChooseQuote(0,totalQ);
 														console.log("seen[RandomNum] = " + seen[RandomNum] );
@@ -188,8 +140,60 @@ function onDeviceReady() { //Do something when the app on device is loaded
 						$("#qotd").html(Quote);
 						console.log("Showing the same fact as before. Wait until tomorrow to get a new fact.");
 		}
-	});
-}
-																			
+	}),
+}; 
+
+
+$(window).ready(function() {
+var headerh;
+var footerh;
+var pageh;
+var hbtn_nextq;
+
+headerh = $("div[data-role='header']").height();
+footerh = $("div[data-role='footer']").height();
+pageh = $(window).height();
+	
+console.log(headerh + " " + footerh + " " + pageh);
+	
+var difference = pageh - headerh - footerh - 35;
+	
+$(".ui-content").css("height", difference);
+	
+var h1, h2, h3, h4;
+	
+h1 = $(".ui-content").height();
+h2 = $(".ui-content>h2").height();
+h3 = $("#quotebox").height();
+hbtn_nextq = $("#nextQ").height();
+
+h4 = (h1 - h2 - h3 - hbtn_nextq - 80) /2;
+	console.log(h1);
+ console.log(h2);
+ console.log(h3);
+	console.log(hbtn_nextq);
+ console.log(h4);
+	
+ var h4s = h4 + "px";
+
+$("#quotebox").css("margin-top",h4s);
+	
+});
+
+//Make the quotebox flip over on click
+$(".facebox").click(function(){
+	$("#quotebox").removeClass("PulseEffect");
+   $(".facebox").fadeOut("slow", function(){
+				  $("#qotd").fadeIn("slow", function(){
+						});
+			});
+});
+
+
+//-------------------------------------------------------------//
+//                                                             //
+// This is the scirpt that will get the facts and display them //
+//                                                             //
+//-------------------------------------------------------------//														
 
 
