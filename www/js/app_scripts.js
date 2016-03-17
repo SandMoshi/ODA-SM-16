@@ -162,7 +162,7 @@ var app = {
 }; 
 
 
-$(window).ready(function() {
+$(window).load(function() {
 var headerh;
 var footerh;
 var pageh;
@@ -201,7 +201,7 @@ $(".ui-content>h2").css("margin-top",h5s);
 });
 
 //Make the quotebox flip over on click
-$(".facebox").click(function(){
+$(".facebox, #ShineDiv").click(function(){
 	$("#quotebox").removeClass("PulseEffect")
 	$("#ShineDiv").removeClass("shine");
 	$(".facebox").css("opacity","0");
