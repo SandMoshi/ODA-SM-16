@@ -90,6 +90,7 @@ var app = {
 
 												//replace the quote with a new one
             $("#qotd:visible").hide();
+												$("#ShineDiv").addClass("shine");
 												$(".facebox").css("background-image",CurrentImage);
 												$(".facebox").css("opacity","1.0");
 												$("#qotd").html(Quote);
@@ -144,16 +145,15 @@ var app = {
 			 var CurrentImage = localStorage.getItem('Curr_ImgUrl');
 			
 			   $("#qotd:visible").hide(); //Hide main quote
-			
+			   $("#ShineDiv2").addClass("shine");
 						if ($('h2').hasClass("invisible")){ //if heading is invisble show it, remove that class
 							$('h2').css('visibility','visible').hide().fadeIn('slow').removeClass("invisible");
 						}
-			
 						$(".facebox").css("background-image",CurrentImage); 
 			   setTimeout( function() { //This is so that the first image and new image don't crossfade/stretch
 								$(".facebox").css("opacity","1.0");
 								}, 100);
-			
+			    
 						$("#qotd").html(Quote); //Replace the main message with the actual quote
 			
 						console.log("Showing the same fact as before. Wait until tomorrow to get a new fact.");
@@ -202,7 +202,8 @@ $(".ui-content>h2").css("margin-top",h5s);
 
 //Make the quotebox flip over on click
 $(".facebox").click(function(){
-	$("#quotebox").removeClass("PulseEffect");
+	$("#quotebox").removeClass("PulseEffect")
+	$("#ShineDiv").removeClass("shine");
 	$(".facebox").css("opacity","0");
 	$("#qotd").fadeIn("slow", function(){});
 });
