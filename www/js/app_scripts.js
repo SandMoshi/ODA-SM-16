@@ -19,7 +19,10 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: 	$("#nextQ").click(function(){ 
-	
+        //Get the lvl and xp from storage
+        var lvl = localStorage.getItem("lvl", lvl);
+	    var XP = localStorage.getItem("XP", XP);
+        
 		var tempd = new Date(); //Get today's date
 		//Checks if localstorage had 'DateOpened' already stored
 	
@@ -30,8 +33,9 @@ var app = {
 	    console.log("Today's date: " + str);
 	
 		var localVal = localStorage.getItem('DateOpened'); 
-     console.log("Previous localVal: " + localVal);
-		if(localVal != null){
+        console.log("Previous localVal: " + localVal);
+		
+        if(localVal != null){
 			var difference = localVal.localeCompare(str);
 		}
 			console.log("localeCompare: " + difference);
@@ -89,12 +93,19 @@ var app = {
 												//Change the image depending on the quote
 
 												//replace the quote with a new one
-            $("#qotd:visible").hide();
+                                                $("#qotd:visible").hide();
 												$("#ShineDiv").addClass("shine");
 												$(".facebox").css("background-image",CurrentImage);
 												$(".facebox").css("opacity","1.0");
 												$("#qotd").html(Quote);
 												console.log("Image Changed");
+                                                //Increase XP
+                                                XP = XP + 25;
+                                                if (XP >= 100){
+                                                  XP = XP - 100;
+                                                  lvl = lvl + 1;
+                                                  //insert level up animation reference here. 
+                                                };
 											
 												//================
 											function ChooseQuote(min,max){
@@ -131,6 +142,7 @@ var app = {
 												 localStorage.setItem('Curr_Fact', Quote);
 												 localStorage.setItem('Curr_ImgUrl', CurrentImage);
 												 localStorage.setItem('seen', seen);
+                                                 localStorage.setItem('XP',XP)
 													}
 									//==================
 								//Save the current date in local storage
@@ -198,8 +210,7 @@ h5 = (h1 - h2 - h3 - h4) /2;
 $(".ui-content>h2").css("margin-top",h5s);
 //$("#nextQ").css("margin-bottom",h5s);
 	
-});
-
+//ShowXP();
 //Make the quotebox flip over on click
 $(".facebox, #ShineDiv").click(function(){
 	$("#quotebox").removeClass("PulseEffect")
@@ -207,7 +218,35 @@ $(".facebox, #ShineDiv").click(function(){
 	$(".facebox").css("opacity","0");
 	$("#qotd").fadeIn("slow", function(){});
 });
+  
+  ShowXP();
+ 
+});
 
+
+function ShowXP(){
+        var XP = localStorage.getItem("XP");
+        var lvl = localStorage.getItem("lvl");
+    
+        XP = 90;  //This is Temporary, remove this in release
+        
+        if (XP == null){
+            XP = 0;
+        }
+        if (lvl == null){
+            lvl = 0;
+        }
+        
+        $(".XPmeter > span").each(function() {
+          $(this)
+            .data("origWidth", XP)
+            .width(0)
+            .animate({
+              width: $(this).data("origWidth") + "%" // or + "%" if fluid
+            }, 1200);
+        });
+
+    }
 
 //-------------------------------------------------------------//
 //                                                             //
