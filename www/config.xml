@@ -1,4 +1,4 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="RockOn.Applications" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.ODA_SM_16" version="1.0.0">
   <name>One Direction Facts</name>
   <description>Become a One Direction super fan these facts!</description>
   <author href="" email="badrush14@hotmail.com">MoshiCorp</author>
