@@ -19,7 +19,7 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: 	$("#nextQ").click(function(){ 
-	
+        
 		var tempd = new Date(); //Get today's date
 		//Checks if localstorage had 'DateOpened' already stored
 	
@@ -30,8 +30,9 @@ var app = {
 	    console.log("Today's date: " + str);
 	
 		var localVal = localStorage.getItem('DateOpened'); 
-     console.log("Previous localVal: " + localVal);
-		if(localVal != null){
+        console.log("Previous localVal: " + localVal);
+		
+        if(localVal != null){
 			var difference = localVal.localeCompare(str);
 		}
 			console.log("localeCompare: " + difference);
@@ -72,7 +73,7 @@ var app = {
 												var lock = new Boolean; //This will be true if the quote is already seen
 												var CurrentImage = String;
 											
-												totalQ = Quotes.length;
+												totalQ = Quotes.length - 1;
 												console.log("TotalQ = " + totalQ);
 											
 												//Get list of which facts have already been seen
@@ -89,13 +90,14 @@ var app = {
 												//Change the image depending on the quote
 
 												//replace the quote with a new one
-            $("#qotd:visible").hide();
+                                                $("#qotd:visible").hide();
 												$("#ShineDiv").addClass("shine");
 												$(".facebox").css("background-image",CurrentImage);
 												$(".facebox").css("opacity","1.0");
 												$("#qotd").html(Quote);
 												console.log("Image Changed");
-											
+											    
+                                                increaseXP();
 												//================
 											function ChooseQuote(min,max){
 												 //Choose 2 random numbers, one for quotes one for image
@@ -185,7 +187,7 @@ h2 = $(".ui-content>h2").outerHeight();
 h3 = $("#quotebox").outerHeight(true);
 h4 = $("#nextQ").outerHeight();
 
-h5 = (h1 - h2 - h3 - h4) /2;
+h5 = ((h1 - h2 - h3 - h4) /2) - 50;
 	console.log(h1);
  console.log(h2);
  console.log(h3);
@@ -198,8 +200,7 @@ h5 = (h1 - h2 - h3 - h4) /2;
 $(".ui-content>h2").css("margin-top",h5s);
 //$("#nextQ").css("margin-bottom",h5s);
 	
-});
-
+//ShowXP();
 //Make the quotebox flip over on click
 $(".facebox, #ShineDiv").click(function(){
 	$("#quotebox").removeClass("PulseEffect")
@@ -207,7 +208,92 @@ $(".facebox, #ShineDiv").click(function(){
 	$(".facebox").css("opacity","0");
 	$("#qotd").fadeIn("slow", function(){});
 });
+  
 
+ShowXP();    
+
+});
+
+
+function increaseXP(){
+    //Get the lvl and xp from storage
+    var lvl = localStorage.getItem("lvl", lvl);
+    var XP = localStorage.getItem("XP", XP);
+    console.log("XP = " + XP + "  Level = " + lvl);
+    
+    lvl = parseInt(lvl);
+    XP = parseInt(XP);
+    
+    //Increase XP
+    XP = XP + 25;
+    
+    //Increase lvl
+    if (XP >= 100){
+      lvl = lvl + 1;
+      localStorage.setItem('XP',XP);
+      localStorage.setItem('lvl',lvl);
+      
+      UpdateXP(XP);
+        setTimeout(function() {
+      ShowUP(lvl);
+        }, 200);
+      XP = XP - 100;
+      UpdateXP(XP);
+    }
+    
+    localStorage.setItem('XP',XP);
+    localStorage.setItem('lvl',lvl);
+    UpdateXP(XP);
+    
+}
+
+function ShowXP(){
+    var XP = localStorage.getItem("XP");
+    var lvl = localStorage.getItem("lvl");
+    
+
+    if (XP == null){
+        XP = 0;
+        localStorage.setItem("XP", XP);
+    }
+    if (lvl == null){
+        lvl = 1;
+        localStorage.setItem("lvl",lvl);
+    }
+    
+    lvl = parseInt(lvl);
+    XP = parseInt(XP);
+    
+    $("#lvl").text(lvl);
+
+    $(".XPmeter > span#bar").each(function() {
+      $(this)
+        .data("origWidth", XP)
+        .width(0)
+        .animate({
+          width: $(this).data("origWidth") + "%" // or + "%" if fluid
+        }, 1200);
+    });
+
+}
+
+function UpdateXP(XP){
+    $(".XPmeter > span#bar").each(function() {
+      $(this)
+        .animate({
+          width: XP + "%" // or + "%" if fluid
+        }, 1200);
+    });
+}
+
+function ShowUP(new_level){
+    $("#medal").animate({height: "100px" },600, function(){
+        $("#lvl").text(new_level);
+        $("#medal").animate({height: "50px" },600);
+    });
+    
+    $(".XPmeter > span#bar").width("0");
+}
 
 //-------------------------------------------------------------//
 //                                                             //
