@@ -69,18 +69,19 @@ var app = {
 												var Quote = new String;
 												var qnumber = 0;
 												var totalQ //The total number of available quotes to choose from
-												var Qrem //Remaining unseen quotes
-												var lock = new Boolean; //This will be true if the quote is already seen
 												var CurrentImage = String;
 											
 												totalQ = Quotes.length - 1;
 												console.log("TotalQ = " + totalQ);
 											
 												//Get list of which facts have already been seen
-												var seen = localStorage.getItem('seen');
+												var seen = JSON.parse(localStorage.getItem('seen'));
 											 console.log("var seen = " + seen);
 													if (seen == null){
 															var seen = new Array(totalQ);
+														 for (var i = 0; i < seen.length; ++i) {
+																	seen[i] = false;
+															}
 														 console.log("var seen = " + seen);
 													}
 											
@@ -105,13 +106,13 @@ var app = {
 													var ImageNum = Math.floor(Math.random()*(5-1+1)+1);
 												 
 													Quote = Quotes[RandomNum];
-													CurrentImage = "url(./images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
+													CurrentImage = "url(./images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)";
 													if (seen[RandomNum] == true ) {
 														//Choose new quote
 														ChooseQuote(0,totalQ);
-														console.log("This quote seen before? = " + seen[RandomNum] );
+														console.log("Has this fact been seen before? Answer: " + seen[RandomNum] );
 														var numOfTrue = 0;
-																		for(var i=0; i<totalQ; i++){
+																		for(var i=0; i<=totalQ; i++){
 																						if(seen[i] === "true")
 																									numOfTrue++;
 																		}
@@ -119,11 +120,11 @@ var app = {
 																			 localStorage.setItem('All_Facts_Seen:', true);
 																			 console.log("All the Facts have been seen. Resetting Facts.");
 																			 seen = new Array(totalQ); //Empty the seen Array
-																			 localStorage.setItem('seen', seen); //Save the empty Array
+																			 localStorage.setItem('seen', JSON.stringify(seen)); //Save the empty Array
 																		}
 															}
 												 else { 
-														seen[RandomNum] = true;
+														seen[RandomNum] = "true";
 														console.log("This fact has never been seen.")
 													}
 													console.log(Quote);
@@ -132,7 +133,7 @@ var app = {
 												 //Remeber which fact is displayed
 												 localStorage.setItem('Curr_Fact', Quote);
 												 localStorage.setItem('Curr_ImgUrl', CurrentImage);
-												 localStorage.setItem('seen', seen);
+												 localStorage.setItem('seen', JSON.stringify(seen));
 													}
 									//==================
 								//Save the current date in local storage
@@ -219,7 +220,7 @@ function increaseXP(){
     //Get the lvl and xp from storage
     var lvl = localStorage.getItem("lvl", lvl);
     var XP = localStorage.getItem("XP", XP);
-    console.log("XP = " + XP + "  Level = " + lvl);
+    console.log("Old XP = " + XP + " Old Level = " + lvl);
     
     lvl = parseInt(lvl);
     XP = parseInt(XP);
@@ -238,6 +239,7 @@ function increaseXP(){
       ShowUP(lvl);
         }, 200);
       XP = XP - 100;
+					 console.log("Current XP = " + XP + " Current Level = " + lvl);
       UpdateXP(XP);
     }
     
