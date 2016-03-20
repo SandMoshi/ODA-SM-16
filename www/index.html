@@ -36,7 +36,7 @@
     <div class="XPmeter animateXP" >
     	    <span id="bar" style="width: 20%"></span>
           <div id="medaldiv">
-            <img id="medal" src="images/medal3.svg"><p id="lvl">1</p></img>
+											<img id="medal" src="images/medal3.svg"><p id="lvl">1</p>
           </div>
     </div>
   </div>
@@ -54,37 +54,5 @@
   <script type="text/javascript">
             app.initialize();
   </script>
-<!--  <script src="./js/admob.js"></script>-->
 </body>
-<script>
-      var admobid = {};
-if( /(android)/i.test(navigator.userAgent) ) { 
-    admobid = { // for Android
-        banner: 'ca-app-pub-8922768677055340/4932077313',
-//        interstitial: 'ca-app-pub-6869992474017983/1657046752'
-    };
-} /*else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
-    admobid = { // for iOS
-        banner: 'ca-app-pub-6869992474017983/4806197152',
-        interstitial: 'ca-app-pub-6869992474017983/7563979554'
-    };
-} else {
-    admobid = { // for Windows Phone
-        banner: 'ca-app-pub-6869992474017983/8878394753',
-        interstitial: 'ca-app-pub-6869992474017983/1355127956'
-    };
-}*/
-
-function initApp() {
-    if (AdMob) {
-        AdMob.createBanner({
-            adId : admobid.banner,
-            position : AdMob.AD_POSITION.BOTTOM_CENTER,
-            autoShow : true
-        });
-    }
-}
-    
-      document.addEventListener('deviceready', initApp, false);
-  </script>
 </html>
