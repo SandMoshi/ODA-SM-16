@@ -26,4 +26,4 @@ function initApp() {
     }
 }
 
-document.addEventListener('deviceready', initApp, false);
+//document.addEventListener('deviceready', initApp, false);
