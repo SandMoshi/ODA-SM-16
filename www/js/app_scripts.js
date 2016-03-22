@@ -31,9 +31,10 @@ var app = {
 	
 		var localVal = localStorage.getItem('DateOpened'); 
      console.log("Previous localVal: " + localVal);
-
+  var difference = localVal.localeCompare(str);
+			  console.log("localeCompare: " + difference);
 		//If stored date is older than this date do something:	
-		if(localVal  == null || localVal.localeCompare(str) < 0){  
+		if(localVal  == null || difference < 0){  
 						// If the localstorage doesn't exist, nothing happens
 						console.log("App will now run once for today.")
 
@@ -42,10 +43,9 @@ var app = {
 								var Quotes = [];
 								var ID = [];
 								var Tag = [];
-								var seen = [];
 										//Get quotes from JSON file
 										$.ajax({
-															url: 'json/facts.json',
+															url: './json/facts.json',
 															dataType: 'json',
 															type: 'get',
 															success: function(data){
@@ -87,20 +87,24 @@ var app = {
 												//Change the image depending on the quote
 
 												//replace the quote with a new one
-
-												$("#qotd").html(Quote);
+            $("#qotd:visible").hide();
 												$(".facebox").css("background-image",CurrentImage);
+												$(".facebox").css("opacity","1.0");
+												$("#qotd").html(Quote);
 												console.log("Image Changed");
 											
 												//================
 											function ChooseQuote(min,max){
+												 //Choose 2 random numbers, one for quotes one for image
 													var RandomNum = Math.floor(Math.random()*(max-min+1)+min);
-													Quote = Quotes[RandomNum];
 													var ImageNum = Math.floor(Math.random()*(5-1+1)+1);
+												 
+													Quote = Quotes[RandomNum];
 													CurrentImage = "url(./images/FaceBoxes/" + Tag[RandomNum] + "/" + Tag[RandomNum] + ImageNum + ".png)"; 
 													if (seen[RandomNum] == true ) {
+														//Choose new quote
 														ChooseQuote(0,totalQ);
-														console.log("seen[RandomNum] = " + seen[RandomNum] );
+														console.log("This quote seen before? = " + seen[RandomNum] );
 														var numOfTrue = 0;
 																		for(var i=0; i<totalQ; i++){
 																						if(seen[i] === "true")
@@ -136,6 +140,8 @@ var app = {
 			//If it is still the same day, show the last fact & image
 			 var Quote = localStorage.getItem('Curr_Fact');
 			 var CurrentImage = localStorage.getItem('Curr_ImgUrl');
+			   $("#qotd:visible").hide();
+			   $(".facebox").css("opacity","1.0");
 						$(".facebox").css("background-image",CurrentImage);
 						$("#qotd").html(Quote);
 						console.log("Showing the same fact as before. Wait until tomorrow to get a new fact.");
@@ -183,10 +189,8 @@ $("#quotebox").css("margin-top",h4s);
 //Make the quotebox flip over on click
 $(".facebox").click(function(){
 	$("#quotebox").removeClass("PulseEffect");
-   $(".facebox").fadeOut("slow", function(){
-				  $("#qotd").fadeIn("slow", function(){
-						});
-			});
+	$(".facebox").css("opacity","0");
+	$("#qotd").fadeIn("slow", function(){});
 });
 
 
