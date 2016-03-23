@@ -31,8 +31,10 @@ var app = {
 	
 		var localVal = localStorage.getItem('DateOpened'); 
      console.log("Previous localVal: " + localVal);
-  var difference = localVal.localeCompare(str);
-			  console.log("localeCompare: " + difference);
+		if(localVal != null){
+			var difference = localVal.localeCompare(str);
+		}
+			console.log("localeCompare: " + difference);
 		//If stored date is older than this date do something:	
 		if(localVal  == null || difference < 0){  
 						// If the localstorage doesn't exist, nothing happens
@@ -141,8 +143,11 @@ var app = {
 			 var Quote = localStorage.getItem('Curr_Fact');
 			 var CurrentImage = localStorage.getItem('Curr_ImgUrl');
 			   $("#qotd:visible").hide();
-			   $(".facebox").css("opacity","1.0");
+			   $('h2').css('visibility','visible').hide().fadeIn('slow');
 						$(".facebox").css("background-image",CurrentImage);
+			   setTimeout( function() {
+								$(".facebox").css("opacity","1.0");
+						}, 100);
 						$("#qotd").html(Quote);
 						console.log("Showing the same fact as before. Wait until tomorrow to get a new fact.");
 		}
