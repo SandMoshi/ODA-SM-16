@@ -26,6 +26,7 @@ body {
 .ui-content {
   background-color: #3892CC;
   box-shadow: 0px -3px 5px 0px rgba(17,60,108,.4);
+	 padding: 0px;
 }
 
 h2 {
@@ -36,6 +37,10 @@ h2 {
    margin: 20px auto 20px auto;
 }
 
+#todayh2 {
+	  width: 80%;
+}
+
 #quotebox {
 	 position: relative;
   width: 80%;
@@ -44,12 +49,12 @@ h2 {
 	 max-width: 500px;
   background-color: #D8315B;
   text-align: center;
-  margin: auto;
   min-height: 200px;
   display: table;
   border-radius: 30px;
-  padding: 0px;
   border: 2px #164C88 solid;
+  padding: 0px;
+  margin: 10% auto 7% auto;
 }
 
 .PulseEffect {

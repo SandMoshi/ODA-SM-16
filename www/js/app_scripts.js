@@ -142,13 +142,20 @@ var app = {
 			//If it is still the same day, show the last fact & image
 			 var Quote = localStorage.getItem('Curr_Fact');
 			 var CurrentImage = localStorage.getItem('Curr_ImgUrl');
-			   $("#qotd:visible").hide();
-			   $('h2').css('visibility','visible').hide().fadeIn('slow');
-						$(".facebox").css("background-image",CurrentImage);
-			   setTimeout( function() {
+			
+			   $("#qotd:visible").hide(); //Hide main quote
+			
+						if ($('h2').hasClass("invisible")){ //if heading is invisble show it, remove that class
+							$('h2').css('visibility','visible').hide().fadeIn('slow').removeClass("invisible");
+						}
+			
+						$(".facebox").css("background-image",CurrentImage); 
+			   setTimeout( function() { //This is so that the first image and new image don't crossfade/stretch
 								$(".facebox").css("opacity","1.0");
-						}, 100);
-						$("#qotd").html(Quote);
+								}, 100);
+			
+						$("#qotd").html(Quote); //Replace the main message with the actual quote
+			
 						console.log("Showing the same fact as before. Wait until tomorrow to get a new fact.");
 		}
 	}),
@@ -161,33 +168,35 @@ var footerh;
 var pageh;
 var hbtn_nextq;
 
-headerh = $("div[data-role='header']").height();
-footerh = $("div[data-role='footer']").height();
+headerh = $("div[data-role='header']").outerHeight();
+footerh = $("div[data-role='footer']").outerHeight();
 pageh = $(window).height();
 	
 console.log(headerh + " " + footerh + " " + pageh);
 	
-var difference = pageh - headerh - footerh - 35;
+var difference = pageh - headerh - footerh;
 	
 $(".ui-content").css("height", difference);
 	
-var h1, h2, h3, h4;
+var h1, h2, h3, h4 , h5;
 	
-h1 = $(".ui-content").height();
-h2 = $(".ui-content>h2").height();
-h3 = $("#quotebox").height();
-hbtn_nextq = $("#nextQ").height();
+h1 = $(".ui-content").outerHeight();
+h2 = $(".ui-content>h2").outerHeight();
+h3 = $("#quotebox").outerHeight(true);
+h4 = $("#nextQ").outerHeight();
 
-h4 = (h1 - h2 - h3 - hbtn_nextq - 80) /2;
+h5 = (h1 - h2 - h3 - h4) /2;
 	console.log(h1);
  console.log(h2);
  console.log(h3);
-	console.log(hbtn_nextq);
- console.log(h4);
+	console.log(h4);
+ console.log(h5);
 	
- var h4s = h4 + "px";
+ var h5s = h5 + "px";
 
-$("#quotebox").css("margin-top",h4s);
+//$("#quotebox").css("margin-top",h5s);
+$(".ui-content>h2").css("margin-top",h5s);
+//$("#nextQ").css("margin-bottom",h5s);
 	
 });
 
