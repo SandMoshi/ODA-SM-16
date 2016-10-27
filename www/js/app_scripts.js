@@ -18,7 +18,8 @@ var app = {
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
-    receivedEvent: 	$("#nextQ").click(function(){ 
+    receivedEvent: 	function() {
+			$("#nextQ").click(function(){ 
         
 		var tempd = new Date(); //Get today's date
 		//Checks if localstorage had 'DateOpened' already stored
@@ -161,7 +162,7 @@ var app = {
 			
 						console.log("Showing the same fact as before. Wait until tomorrow to get a new fact.");
 		}
-	}),
+	})},
 }; 
 
 
