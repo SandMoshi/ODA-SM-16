@@ -18,7 +18,7 @@ var app = {
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
-    receivedEvent: 	function() {
+    receivedEvent('deviceready'): 	function() {
 			$("#nextQ").click(function(){ 
         
 		var tempd = new Date(); //Get today's date
