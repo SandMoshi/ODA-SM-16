@@ -37,7 +37,8 @@
 <!--  <gap:plugin name="org.apache.cordova.splashscreen"/>-->
 <!--  <gap:plugin name="org.apache.cordova.vibration"/>-->
 <!--  <gap:plugin name="cordova-plugin-admob" source="npm" />-->
-<plugin name="com.admob.google" spec="4.0.8" source="pgb" />
+<!--<plugin name="com.admob.google" spec="4.0.8" source="pgb" />-->
+<gap:plugin name="phonegap-admob" source="npm"/>
 
   
   <icon src="icon.png"/>
