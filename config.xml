@@ -1,7 +1,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.ODA_SM_16" version="1.0.0">
   <name>One Direction Facts</name>
   <description>Become a One Direction super fan these facts!</description>
-  <author href="" email="badrush14@hotmail.com">MoshiCorp</author>
+  <author href="" email="badrush14@hotmail.com">MoshiMedia</author>
   <content src="index.html"/>
   <preference name="permissions" value="none"/>
   <preference name="orientation" value="default"/>
@@ -52,8 +52,8 @@
 		</platform>
   
   <platform name="android" />
-  <platform name="ios" />
-		<platform name="winphone" />
+<!--  <platform name="ios" />-->
+<!--		<platform name="winphone" />-->
   <preference name="orientation" value="portrait" />
   
 	<!-- Android Icons -->
